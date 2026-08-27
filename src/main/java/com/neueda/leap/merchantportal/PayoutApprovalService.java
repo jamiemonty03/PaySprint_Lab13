@@ -8,10 +8,7 @@ public class PayoutApprovalService {
         this.payoutRepository = payoutRepository;
     }
 
-    // FIX (A06): this is a design fix, not just a code fix, enforce
-    // segregation of duties: the approver can never be the same person who
-    // requested the payout. No implementation detail elsewhere can patch
-    // around a design that doesn't have this rule.
+    // FIX (A06): this is a design fix
     public void approve(Long payoutId, Long approvingUserId) {
         PayoutRequest payout = payoutRepository.findById(payoutId)
                 .orElseThrow(() -> new RuntimeException("Payout not found"));
